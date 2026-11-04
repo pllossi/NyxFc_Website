@@ -1,0 +1,5 @@
+services:
+  nyxfc-web:
+    build: .
+    ports:
+      - "8000:80"

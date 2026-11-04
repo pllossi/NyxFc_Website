@@ -1,10 +1,10 @@
 <?php
-$nextMatches = [
-    ['day' => 'Domenica', 'date' => '10 Novembre', 'opponent' => 'Thunder 7', 'time' => '18:30'],
-    ['day' => 'Mercoledì', 'date' => '13 Novembre', 'opponent' => 'Atletico Nord', 'time' => '21:00'],
-    ['day' => 'Sabato', 'date' => '16 Novembre', 'opponent' => 'Real City', 'time' => '16:00'],
-];
 
+declare(strict_types=1);
+
+require __DIR__ . '/db.php';
+
+$matchdays = nyx_fetch_matchdays(nyx_get_pdo());
 $teamValues = [
     ['title' => 'Spirito di squadra', 'description' => 'Ogni azione nasce dalla fiducia tra compagni, dentro e fuori dal campo.'],
     ['title' => 'Intensità', 'description' => 'Pressing alto, ritmo continuo e voglia di conquistare ogni pallone.'],
@@ -30,6 +30,7 @@ $teamValues = [
                 <a href="#squadra">Squadra</a>
                 <a href="#partite">Partite</a>
                 <a href="#contatti">Contatti</a>
+                <a href="/admin.php">Admin</a>
             </div>
         </nav>
         <div class="hero-content">
@@ -57,11 +58,17 @@ $teamValues = [
         <section class="section section-dark" id="partite">
             <h2>Calendario</h2>
             <div class="matches">
-                <?php foreach ($nextMatches as $match): ?>
+                <?php foreach ($matchdays as $match): ?>
                     <article class="match reveal">
-                        <p class="match-day"><?= htmlspecialchars($match['day'], ENT_QUOTES, 'UTF-8'); ?></p>
-                        <p><?= htmlspecialchars($match['date'], ENT_QUOTES, 'UTF-8'); ?> · Ore <?= htmlspecialchars($match['time'], ENT_QUOTES, 'UTF-8'); ?></p>
+                        <p class="match-day"><?= htmlspecialchars(nyx_italian_day($match['match_date']), ENT_QUOTES, 'UTF-8'); ?></p>
+                        <p><?= htmlspecialchars($match['match_date'], ENT_QUOTES, 'UTF-8'); ?> · Ore <?= htmlspecialchars($match['match_time'], ENT_QUOTES, 'UTF-8'); ?></p>
                         <h3>Nyx FC vs <?= htmlspecialchars($match['opponent'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                        <?php if (!empty($match['location'])): ?>
+                            <p>Campo: <?= htmlspecialchars((string) $match['location'], ENT_QUOTES, 'UTF-8'); ?></p>
+                        <?php endif; ?>
+                        <?php if (!empty($match['notes'])): ?>
+                            <p><?= htmlspecialchars((string) $match['notes'], ENT_QUOTES, 'UTF-8'); ?></p>
+                        <?php endif; ?>
                     </article>
                 <?php endforeach; ?>
             </div>

@@ -5,6 +5,7 @@
     --muted: #9ca8c7;
     --accent: #6de1ff;
     --accent-strong: #3eb9ff;
+    --danger: #ff6b6b;
 }
 
 * {
@@ -118,7 +119,8 @@ h1 {
 }
 
 .card,
-.match {
+.match,
+.admin-panel {
     background: var(--panel);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 1rem;
@@ -155,6 +157,75 @@ h1 {
 .reveal.is-visible {
     opacity: 1;
     transform: none;
+}
+
+.admin-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.back-link {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.admin-form {
+    display: grid;
+    gap: 0.9rem;
+}
+
+.admin-form label {
+    display: grid;
+    gap: 0.35rem;
+    color: var(--muted);
+}
+
+.admin-form input {
+    padding: 0.7rem;
+    border-radius: 0.6rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: #0b1322;
+    color: var(--text);
+}
+
+.btn {
+    width: fit-content;
+    padding: 0.6rem 1rem;
+    border-radius: 0.6rem;
+    border: 0;
+    cursor: pointer;
+    background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+    color: #03121d;
+    font-weight: 700;
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: #fff;
+}
+
+.notice {
+    color: #94f6b4;
+}
+
+.error {
+    color: #ff9f9f;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 0.65rem 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 @media (max-width: 680px) {
